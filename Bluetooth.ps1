@@ -226,7 +226,7 @@ function Install-ScheduledTasks {
 
         $action = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument "-ExecutionPolicy Unrestricted -WindowStyle Hidden -File `"$PSCommandPath`" $($task['State'])"
 
-        $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -ExecutionTimeLimit '00:01'
+        $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit '00:01'
 
         Register-ScheduledTask -TaskName $task['Name'] -Action $action -Trigger $trigger -Settings $settings -RunLevel Highest -Force -User 'NT AUTHORITY\SYSTEM'
     }
